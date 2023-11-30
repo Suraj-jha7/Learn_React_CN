@@ -14,11 +14,14 @@
         
     let score=1;
     let wicket=0;
+    let ballWiseRes=[];
 
     function addScore(num){
+        ballWiseRes.push(num);
         score+=num;
         console.log(score);
         rootElement.render(<App/>)
+        console.log(ballWiseRes);
     }
 
     function addWicket(){
@@ -29,13 +32,27 @@
         wicket=0;
         score=0;
         }
+        ballWiseRes.push("W");
         rootElement.render(<App/>)
+       
     }
-    const App = ()=>(
-        
-        <>
-        <h1>SCORE KEEPER</h1>
-        <h2>SCORE: {score}/{wicket}</h2>
+
+    const Result=()=>{
+         return <div>
+            {
+                ballWiseRes.map((res,index)=>(
+                   <> 
+                    { index %6===0?<br/>:null}
+                    
+                  <span key={index}>{res!=0?res:<strong>.</strong>} </span>
+                  </>  
+                )) }
+        </div>
+    }
+
+    const ScoreButtons =()=>{
+    return <div>
+        <button onClick={()=>{addScore(0)}}>0</button>
         <button onClick={function(){addScore(1)}}>1</button>
         <button onClick={()=>{addScore(2)}}>2</button>
         <button onClick={()=>{addScore(3)}}>3</button>
@@ -43,6 +60,30 @@
         <button onClick={()=>{addScore(5)}}>5</button>
         <button onClick={()=>{addScore(6)}}>6</button>
         <button onClick={addWicket}>Wicket</button>
+    </div>
+    }
+
+    const handleSubmit = (e)=>(
+        e.preventDefault()
+    )
+
+    const Form = ()=>{
+       return  <form onSubmit={handleSubmit}>
+            <input placeholder="Enter the score"/>
+            <input placeholder="Enter the comments"/>
+            <button>submit</button>
+            
+        </form>
+            
+    }
+    const App = ()=>(
+        
+        <>
+        <h1>SCORE KEEPER</h1>
+        <h2>SCORE: {score}/{wicket}</h2>
+        <ScoreButtons/><br/>
+        <Form/>
+        <hr/>
         </>
         
     )
