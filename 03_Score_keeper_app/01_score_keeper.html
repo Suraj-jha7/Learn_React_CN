@@ -17,8 +17,12 @@
     let ballWiseRes=[];
 
     function addScore(num){
-        ballWiseRes.push(num);
-        score+=num;
+        if(wicket<10)
+        {
+            ballWiseRes.push(num);
+            score+=num;
+        }
+      
         console.log(score);
         rootElement.render(<App/>)
         console.log(ballWiseRes);
@@ -26,13 +30,13 @@
 
     function addWicket(){
         
-        wicket+=1;
-        if(wicket>10)
+       
+        if(wicket<10)
         {
-        wicket=0;
-        score=0;
-        }
+            wicket+=1;
         ballWiseRes.push("W");
+        }
+        
         rootElement.render(<App/>)
        
     }
