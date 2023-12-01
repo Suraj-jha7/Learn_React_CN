@@ -37,27 +37,39 @@
 
     <script type="text/babel">
       // Do not change the classNames of the elements from the default markup
-
+        var name,email,about;
       const Card = () => (
+
         <div className="card">
-          <h3>Name: </h3>
-          <p>Email: </p>
-          <p>About: </p>
+          <h3>Name:{name}</h3>
+          <p>Email:{email} </p>
+          <p>About:{about} </p>
+         
         </div>
+        
       );
       
-      const handleuserinput=()=>{
-      
-      }
+      const handleuserName=(e)=>{
+      name=e.target.value;
+      rootElement.render(<App />);
+        }
+        const handleuserEmail=(e)=>{
+      email=e.target.value;
+      rootElement.render(<App />);
+        }
+        const handleuserAbout=(e)=>{
+      about=e.target.value;
+      rootElement.render(<App />);
+        }
 
       const App = () => (
       
         <div className="App">
         <Card/>
           <div className="inputs">
-            <input placeholder="Name" onChange={handleuserinput}/>
-            <input type="email" placeholder="Email" />
-            <textarea placeholder="About"></textarea>
+            <input placeholder="Name" onChange={handleuserName}/>
+            <input type="email" placeholder="Email" onChange={handleuserEmail} />
+            <textarea placeholder="About" onChange={handleuserAbout}></textarea>
           </div>
         </div>
       );
